@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Swagger Food App - OpenAPI 3.0
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://localhost:8080/api
+tags:
+  - name: food
+    description: food food and food
+  - name: user
+    description: users
+paths:
+  /user/signup:
+    post:
+      tags:
+        - user
+      summary: signup
+      operationId: signup
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreateResponse"
+
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Logs user
+      operationId: loginUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        "400":
+          description: Invalid username/password
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 78b5a238-2e2b-48b7-bbd5-cfd3cd0a63a4
+        username:
+          type: string
+          example: theUser
+        password:
+          type: string
+          example: "12345"
+    UserCreateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 78b5a238-2e2b-48b7-bbd5-cfd3cd0a63a4
+        username:
+          type: string
+          example: theUser
+    LoginResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 78b5a238-2e2b-48b7-bbd5-cfd3cd0a63a4
+        username:
+          type: string
+          example: theUserss
+        accessToken:
+          type: string
