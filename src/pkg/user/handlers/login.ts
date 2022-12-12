@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { PrivateHandler } from "src/common/types/server";
 import * as userDal from "src/dal/user";
-import { User } from "src/models/user";
 
 export const login: PrivateHandler = async (req, res) => {
   const { username, password } = req.body;
@@ -20,6 +19,7 @@ export const login: PrivateHandler = async (req, res) => {
   delete user.password;
 
   const accessToken = jwt.sign(user, process.env.JWT_SECRET);
+
   return res.json({
     accessToken: accessToken,
     id: user.id,
